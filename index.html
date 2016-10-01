@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+	<head>
+		<title>CSS Event variables demo</title>
+		<style>
+			:root {
+				--ev-scroll: "50";
+				--ev-mousex: "100";
+				--ev-mousey: "50";
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 20px;
+				line-height: 1.5;
+				color: #333;
+			}
+
+			h1 {
+				font-size: 3em;
+				margin-bottom: 0.25em;
+			}
+
+			h2 {
+				font-size: 2em;
+			}
+
+			p {
+				margin: 0 0 1.5em;
+			}
+
+			header,
+			footer {
+				width: 100%;
+				padding: 3em 0;
+				text-align: center;
+			}
+
+			header {
+				margin-bottom: 2em;
+				color: #fff;
+				background-color: rebeccapurple;
+			}
+
+			footer {
+				background: #f06;
+			}
+
+			.container {
+				width: 90%;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.demos p:after {
+				display: inline-block;
+			}
+
+			.scrollPercentage::after { content: var(--ev-scroll); }
+			.mouseX::after { content: var(--ev-mousex); }
+			.mouseY::after { content: var(--ev-mousey); }
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<h1>CSS Event variables</h1>
+			<p>A JavaScript library that adds CSS variables based on user actions on the document.</p>
+		</header>
+
+		<div class="container">
+			<div class="installation">
+				<h2>Installing</h2>
+
+				<p>Some installation instructions here:</p>
+			</div>
+
+			<div class="demos">
+				<h2>Demos</h2>
+
+				<p class="scrollPercentage">Scroll Percentage: </p>
+				<p class="mouseX">Mouse X position: </p>
+				<p class="mouseY">Mouse Y position: </p>
+			</div>
+		</div>
+
+		<footer>
+			<p>Inspired by Lea Verou's talk on CSS Variables. Developed by <a href="http://adamonishi.com">Adam Onishi</a></p>
+		</footer>
+
+		<script>
+			var root = document.documentElement;
+
+			document.addEventListener("mousemove", evt => {
+				let x = evt.clientX / innerWidth;
+				let y = evt.clientY / innerHeight;
+
+				root.style.setProperty("--ev-mousex", '"' + x + '"');
+				root.style.setProperty("--ev-mousey", '"' + y + '"');
+			});
+
+		</script>
+	</body>
+</html>
